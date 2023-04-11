@@ -29,7 +29,7 @@ public class ResultsImpl implements Results {
     public List<Result> getRanking() {
         try{
             this.mutex.lock();
-            return this.ranking.stream().limit(this.nResults).collect(Collectors.toList());
+            return new LinkedList<>(this.ranking);
         }finally {
             this.mutex.unlock();
         }

@@ -18,7 +18,8 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 public class MasterThread extends Thread{
-    public static final int N_WORKERS = 7;
+    public static final int N_WORKERS = 2;
+    private static final int NF = 5;
     private final Controller controller;
     private final int nWorkers;
     private final SynchronizedQueue<String> files = new SynchronizedQueueImpl<>();
@@ -52,12 +53,8 @@ public class MasterThread extends Thread{
     }
 
     private void searchFiles(){
-        try (Stream<Path> walkStream = Files.walk(Paths.get(this.controller.getSetupInfo().startDir()))) {
-            walkStream.filter(p -> p.toFile().isFile() && p.toString().endsWith(".java"))
-                    .map(Path::toString)
-                    .forEach(this.files::add);
-        } catch (IOException e) {
-            System.err.println(e);
+        for(int i = 0; i < NF; i++){
+            this.files.add("file"+i);
         }
     }
 }

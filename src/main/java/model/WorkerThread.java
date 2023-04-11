@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.Random;
 
 public class WorkerThread extends Thread{
     private final SynchronizedQueue<String> files;
@@ -33,16 +34,6 @@ public class WorkerThread extends Thread{
     }
 
     private int countLines(String path){
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader(path));
-            int lines = 0;
-            while (reader.readLine() != null) {
-                lines++;
-            }
-            reader.close();
-            return lines;
-        }catch (IOException e){
-            throw new RuntimeException(e);
-        }
+        return 300;
     }
 }
